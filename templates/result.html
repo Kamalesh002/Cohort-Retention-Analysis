@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Retention Curve</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <div id="plot"></div>
+    <script>
+
+
+        // Define the retention data as a JavaScript object
+        var retention_data = JSON.parse('{{ retention_data | tojson }}');
+
+        // Now we can use the `retention_data` variable in any other scripts on the page.
+        console.log(retention_data); // example usage
+
+
+
+        var months = [];
+        var retention_rates = [];
+
+        for (var i = 0; i < retention_data.length; i++) {
+            months.push(retention_data[i][0]);
+            retention_rates.push(retention_data[i][1]);
+        } var trace = { x: months, y: retention_rates, type: 'scatter' }; var
+            layout = { title: 'Retention Curve', xaxis: { title: 'Month' }, yaxis: { title: 'Retention Rate' } }; var
+                data = [trace]; Plotly.newPlot('plot', data, layout); </script>
+</body>
+
+</html>
